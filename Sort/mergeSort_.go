@@ -5,21 +5,32 @@ import "fmt"
 func main() {
 	arr := []int{1, 4, 7, 2, 5, 8, 3, 6, 9, 0, -1}
 	fmt.Println(arr)
-	mergeSort(arr, 0, len(arr)-1)
+	mergeSort_(arr)
 	fmt.Println(arr)
 }
 
-// 归并排序 的 递归版本
+// 归并排序 的 非递归版本
 // Time: O(nlogn)
 // Space: O(n)
-func mergeSort(arr []int, left, right int) {
-	if right <= left {
-		return
+func mergeSort_(arr []int) {
+	n := len(arr)
+	step := 1
+	for step < n {
+		left := 0
+		for left < n {
+			mid := left + step - 1
+			if mid >= n {
+				break
+			}
+			right := min(mid+step, n-1)
+			merge(arr, left, mid, right)
+			left = right + 1
+		}
+		if step > n/2 {
+			break
+		}
+		step <<= 1
 	}
-	mid := left + (right-left)>>1
-	mergeSort(arr, left, mid)
-	mergeSort(arr, mid+1, right)
-	merge(arr, left, mid, right)
 }
 
 func merge(arr []int, left, mid, right int) {
@@ -49,4 +60,11 @@ func merge(arr []int, left, mid, right int) {
 	for i := 0; i < len(nums); i++ {
 		arr[left+i] = nums[i]
 	}
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
