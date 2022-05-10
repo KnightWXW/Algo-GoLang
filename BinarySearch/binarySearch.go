@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+	// 在 有序数组 中 查找 target 的 索引位置
 	arr := []int{-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	fmt.Println(binarySearch(arr, 7))
 }
