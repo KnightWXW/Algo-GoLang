@@ -4,10 +4,10 @@ import "fmt"
 
 func main() {
 	arr := []int{1, 4, 7, 2, 5, 8, 3, 6, 9, 0, -1}
-	fmt.Println(smallSum(arr))
+	fmt.Println(reversePairs(arr))
 }
 
-func smallSum(arr []int) int {
+func reversePairs(arr []int) int {
 	if len(arr) <= 1 {
 		return 0
 	}
@@ -32,6 +32,7 @@ func merge(arr []int, left, mid, right int) int {
 		if arr[i] < arr[j] {
 			sum += (right - j + 1) * arr[i]
 		}
+
 		if arr[i] < arr[j] {
 			nums[index] = arr[i]
 			i++
