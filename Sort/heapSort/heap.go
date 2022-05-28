@@ -9,7 +9,7 @@ type Heap struct {
 	Limit int
 }
 
-func newHeap(limit int) *Heap {
+func createHeap(limit int) *Heap {
 	return &Heap{
 		Arr:   make([]int, limit),
 		Size:  0,
@@ -18,7 +18,7 @@ func newHeap(limit int) *Heap {
 }
 
 func main() {
-	h := newHeap(10)
+	h := createHeap(10)
 	fmt.Println(h.isEmpty()) //true
 	h.push(7)
 	h.push(3)
