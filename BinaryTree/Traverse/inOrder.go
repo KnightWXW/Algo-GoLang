@@ -32,15 +32,15 @@ func inOrderRecursion(node *TreeNode) {
 // 中序遍历 的 非递归实现:
 func inOrderIteration(node *TreeNode) {
 	stack := []*TreeNode{}
-	for len(stack) != 0 || node != nil {
+	for len(stack) > 0 || node != nil {
 		if node != nil {
 			stack = append(stack, node)
 			node = node.Left
 		} else {
-			node := stack[len(stack)-1]
+			cur := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
-			fmt.Printf("%v ", node.Val)
-			node = node.Right
+			fmt.Printf("%v ", cur.Val)
+			node = cur.Right
 		}
 	}
 }
