@@ -5,11 +5,11 @@ import "fmt"
 func main() {
 	arr := []int{1, 4, 3, 5, 5, 5, 2, 1, -1, 7, 0, 6, 7, 8, 9, 5}
 	fmt.Println(arr)
-	quickSort(arr)
+	quickSort0(arr)
 	fmt.Println(arr)
 }
 
-func quickSort(arr []int) {
+func quickSort0(arr []int) {
 	if arr == nil || len(arr) < 2 {
 		return
 	}
