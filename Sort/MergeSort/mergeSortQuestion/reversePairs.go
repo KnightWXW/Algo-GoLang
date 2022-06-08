@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	arr := []int{1, 4, 7, 2, 5, 8, 3, 6, 9, 0, -1}
+	arr := []int{7, 5, 6, 4}
 	fmt.Println(reversePairs(arr))
 }
 
@@ -27,30 +27,31 @@ func process(arr []int, left, right int) int {
 func merge(arr []int, left, mid, right int) int {
 	sum := 0
 	nums := make([]int, right-left+1)
-	i, j, index := left, mid+1, 0
-	for i <= mid && j <= right {
-		if arr[i] < arr[j] {
-			sum += (right - j + 1) * arr[i]
+	i, j, index := mid, right, len(nums)-1
+	for i >= left && j >= mid+1 {
+
+		if arr[i] > arr[j] {
+			sum += j - mid
 		}
 
 		if arr[i] < arr[j] {
 			nums[index] = arr[i]
-			i++
+			i--
 		} else {
 			nums[index] = arr[j]
-			j++
+			j--
 		}
-		index++
+		index--
 	}
-	for i <= mid {
+	for i >= left {
 		nums[index] = arr[i]
-		index++
-		i++
+		index--
+		i--
 	}
-	for j <= right {
+	for j >= mid+1 {
 		nums[index] = arr[j]
-		index++
-		j++
+		index--
+		j--
 	}
 
 	for i := 0; i < len(nums); i++ {
