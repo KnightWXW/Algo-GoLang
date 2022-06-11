@@ -6,7 +6,7 @@ import (
 
 // 二叉树节点 TreeNode：
 type TreeNode struct {
-	Val   int       `二叉树节点的数值`
+	Val   int       `二叉树节点存储的数据`
 	Left  *TreeNode `二叉树节点的左子树节点`
 	Right *TreeNode `二叉树节点的右子树节点`
 }

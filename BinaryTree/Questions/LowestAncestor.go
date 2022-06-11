@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// 计算 当前树 的 最大距离：
+// 计算 两个节点 的 最近公共祖先：
 func main() {
 	root := CreateTreeNode(5)
 	root.Left = CreateTreeNode(3)
