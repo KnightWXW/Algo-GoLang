@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 
-// 计算给定二叉树中最大的二叉搜索树（BST）子树，最大指的是子树的节点数最多
+// 计算给定二叉树中最大的二叉搜索树（BST）子树，最大指的是子树的节点数最多，返回该子树的节点数量
 func main() {
-	// 应为 6
+
 	root1 := CreateTreeNode(4)
 	root1.Left = CreateTreeNode(7)
 	root1.Left.Left = CreateTreeNode(5)
@@ -18,9 +18,8 @@ func main() {
 	root1.Right.Left = CreateTreeNode(4)
 	root1.Right.Right = CreateTreeNode(7)
 	root1.Right.Right.Right = CreateTreeNode(9)
-	fmt.Println(maxBSTSubtreeSize(root1))
+	fmt.Println(maxBSTSubtreeSize(root1)) // 应为 6
 
-	// 应为 4
 	root2 := CreateTreeNode(4)
 	root2.Left = CreateTreeNode(7)
 	root2.Left.Left = CreateTreeNode(10)
@@ -32,7 +31,7 @@ func main() {
 	root2.Right.Left = CreateTreeNode(4)
 	root2.Right.Right = CreateTreeNode(7)
 	root2.Right.Right.Right = CreateTreeNode(9)
-	fmt.Println(maxBSTSubtreeSize(root2))
+	fmt.Println(maxBSTSubtreeSize(root2)) // 应为 4
 }
 
 func maxBSTSubtreeSize(root *TreeNode) int {
@@ -59,7 +58,7 @@ func processMaxBSTSubtreeSize(root *TreeNode) *InfoMaxBSTSubtreeSize {
 		minVal = max(rightInfo.MinVal, minVal)
 		size += rightInfo.Size
 	}
-	// 更新 MaxBSTDistance:
+	// 更新 MaxBSTHead:
 	s1, s2, s3 := -1, -1, -1
 
 	// 一、root 不是 最终 所要的节点：
@@ -81,25 +80,21 @@ func processMaxBSTSubtreeSize(root *TreeNode) *InfoMaxBSTSubtreeSize {
 	if rightInfo == nil || rightInfo.Size == rightInfo.MaxBSTSize {
 		rightIsBST = true
 	}
-
-	if leftIsBST && rightIsBST {
-		// 判断 左子树的MaxVal < root.Val < 右子树的MinVal
-		leftMaxLessVal, rightMinMoreVal := false, true
-		if leftInfo == nil || leftInfo.MaxVal < root.Val {
-			leftMaxLessVal = true
+	// 判断 左子树的MaxVal < root.Val < 右子树的MinVal
+	leftMaxLessVal, rightMinMoreVal := false, false
+	if leftInfo == nil || leftInfo.MaxVal < root.Val {
+		leftMaxLessVal = true
+	}
+	if rightInfo == nil || rightInfo.MinVal > root.Val {
+		rightMinMoreVal = true
+	}
+	if leftIsBST && rightIsBST && leftMaxLessVal && rightMinMoreVal {
+		s3 = 1
+		if leftInfo != nil {
+			s3 += leftInfo.Size
 		}
-		if rightInfo == nil || rightInfo.MaxVal > root.Val {
-			rightMinMoreVal = true
-		}
-		// 更新 s3:
-		if leftMaxLessVal && rightMinMoreVal {
-			s3 = 1
-			if leftInfo != nil {
-				s3 += leftInfo.Size
-			}
-			if rightInfo != nil {
-				s3 += rightInfo.Size
-			}
+		if rightInfo != nil {
+			s3 += rightInfo.Size
 		}
 	}
 	return createInfoMaxBSTSubtreeSize(max(max(s1, s2), s3), size, maxVal, minVal)
