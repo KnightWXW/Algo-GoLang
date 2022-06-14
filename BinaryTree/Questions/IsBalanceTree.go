@@ -15,6 +15,7 @@ func main() {
 	root1.Right.Left = CreateTreeNode(7)
 	root1.Right.Right = CreateTreeNode(9)
 	fmt.Println(isBT(root1))
+	fmt.Println(is_BT(root1))
 
 	// root2 不是 平衡二叉树
 	root2 := CreateTreeNode(5)
@@ -24,8 +25,27 @@ func main() {
 	root2.Left.Right = CreateTreeNode(4)
 	root2.Left.Left.Left = CreateTreeNode(9)
 	fmt.Println(isBT(root2))
+	fmt.Println(is_BT(root2))
 }
 
+//------------------------------普通递归------------------------------------------
+func is_BT(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
+	var height func(root *TreeNode) int
+	height = func(root *TreeNode) int {
+		if root == nil {
+			return 0
+		}
+		return max(height(root.Left), height(root.Right)) + 1
+	}
+	return abs(height(root.Left)-height(root.Right)) <= 1
+}
+
+//-------------------------------------------------------------------------------
+
+//-------------------------------递归套路------------------------------------------
 func isBT(root *TreeNode) bool {
 	if root == nil {
 		return true
@@ -50,7 +70,6 @@ func processIsBT(root *TreeNode) *InfoIsBT {
 	if abs(leftInfo.Height-rightInfo.Height) >= 2 {
 		flag = false
 	}
-
 	return createInfoIsBT(flag, height)
 }
 
@@ -62,3 +81,5 @@ type InfoIsBT struct {
 func createInfoIsBT(flag bool, height int) *InfoIsBT {
 	return &InfoIsBT{flag, height}
 }
+
+//----------------------------------------------------------------------------

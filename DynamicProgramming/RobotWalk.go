@@ -14,15 +14,15 @@ import "fmt"
 
 func main() {
 	fmt.Print("暴力递归：")
-	fmt.Println(RobotWalk_A(5, 2, 4, 4))
+	fmt.Println(robotWalk_A(5, 2, 4, 4))
 	fmt.Print("记忆化搜索：")
-	fmt.Println(RobotWalk_B(5, 2, 4, 4))
+	fmt.Println(robotWalk_B(5, 2, 4, 4))
 	fmt.Print("动态规划：")
-	fmt.Println(RobotWalk_C(5, 2, 4, 4))
+	fmt.Println(robotWalk_C(5, 2, 4, 4))
 }
 
 // 暴力递归：
-func RobotWalk_A(n, cur, cnt, end int) int {
+func robotWalk_A(n, cur, cnt, end int) int {
 	if n <= 1 || cur <= 0 || cur > n || cnt < 0 || end <= 0 || end > n {
 		return -1
 	}
@@ -46,7 +46,7 @@ func RobotWalk_A_Process(n, cur, cnt, end int) int {
 }
 
 // 记忆化搜索：
-func RobotWalk_B(n, cur, cnt, end int) int {
+func robotWalk_B(n, cur, cnt, end int) int {
 	if n <= 1 || cur <= 0 || cur > n || cnt < 0 || end <= 0 || end > n {
 		return -1
 	}
@@ -85,7 +85,7 @@ func RobotWalk_B_Process(n, cur, cnt, end int, dp [][]int) int {
 }
 
 // 动态规划：
-func RobotWalk_C(n, cur, cnt, end int) int {
+func robotWalk_C(n, cur, cnt, end int) int {
 	if n <= 1 || cur <= 0 || cur > n || cnt < 0 || end <= 0 || end > n {
 		return -1
 	}

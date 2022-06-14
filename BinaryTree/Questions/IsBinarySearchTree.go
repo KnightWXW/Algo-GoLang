@@ -15,6 +15,7 @@ func main() {
 	root1.Right.Left = CreateTreeNode(7)
 	root1.Right.Right = CreateTreeNode(9)
 	fmt.Println(isBST(root1))
+	fmt.Println(is_BST(root1))
 
 	// root2 不是 二叉搜索树
 	root2 := CreateTreeNode(5)
@@ -25,8 +26,34 @@ func main() {
 	root2.Right.Left = CreateTreeNode(7)
 	root2.Right.Right = CreateTreeNode(9)
 	fmt.Println(isBST(root2))
+	fmt.Println(is_BST(root2))
 }
 
+//-----------------------------数组+中序遍历----------------------------------------
+func is_BST(root *TreeNode) bool {
+	arr := []int{}
+
+	var dfsIs_BST func(root *TreeNode, arr *[]int)
+	dfsIs_BST = func(root *TreeNode, arr *[]int) {
+		if root == nil {
+			return
+		}
+		dfsIs_BST(root.Left, arr)
+		*arr = append(*arr, root.Val)
+		dfsIs_BST(root.Right, arr)
+	}
+	dfsIs_BST(root, &arr)
+	for i := 0; i < len(arr)-1; i++ {
+		if arr[i] >= arr[i+1] {
+			return false
+		}
+	}
+	return true
+}
+
+//------------------------------递归套路-------------------------------------------
+
+//------------------------------递归套路-------------------------------------------
 func isBST(root *TreeNode) bool {
 	if root == nil {
 		return true
@@ -82,3 +109,5 @@ type InfoIsBST struct {
 func createInfoIsBST(flag bool, maxVal, minVal int) *InfoIsBST {
 	return &InfoIsBST{flag, maxVal, minVal}
 }
+
+//------------------------------------------------------------------------------
