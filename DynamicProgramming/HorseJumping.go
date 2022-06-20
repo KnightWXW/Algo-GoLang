@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 	在中国象棋的棋盘中，把整个棋盘放入第一象限,
